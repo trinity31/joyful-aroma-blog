@@ -24,5 +24,6 @@ export async function getStaticProps() {
     props: {
       posts: notionPages,
     },
+    revalidate: 600,
   };
 }
