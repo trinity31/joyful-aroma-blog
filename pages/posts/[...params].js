@@ -1,6 +1,5 @@
 import { getAllNotionPages, getNotionPage } from "@/lib/notion-util";
-import { useRouter } from "next/router";
-import PostContent from "./post-detail/post-content";
+import PostContent from "../../components/posts/post-detail/post-content";
 
 export default function PostDetailPage(props) {
   return <PostContent post={props.post} />;
