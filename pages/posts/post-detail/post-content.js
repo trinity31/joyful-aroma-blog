@@ -4,8 +4,7 @@ import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function PostContent(props) {
-  const { post } = props;
+export default function PostContent({ post }) {
   const [imgError, setImgError] = useState(false);
 
   const imagePath = `/images/posts/${post.slug}.jpeg`;
