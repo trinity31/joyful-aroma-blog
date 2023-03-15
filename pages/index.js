@@ -13,12 +13,12 @@ export default function HomePage(props) {
           name="description"
           content="Blog about essential oils and aromatherapy"
         />
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.ADS_CLIENT_ID}`}
-          crossorigin="anonymous"
-        ></Script>
       </Head>
+      <Script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.ADS_CLIENT_ID}`}
+        crossorigin="anonymous"
+      ></Script>
       <FeaturedPosts posts={props.posts} />
     </>
   );
