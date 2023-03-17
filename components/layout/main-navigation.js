@@ -20,6 +20,11 @@ function MainNavigation() {
           <li>
             <Link href="/profiles">Profiles</Link>
           </li>
+          {process.env.NODE_ENV === "development" && (
+            <li>
+              <Link href="/manage">Manage</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
