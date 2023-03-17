@@ -7,7 +7,7 @@ export default function AllPostsPage(props) {
 }
 
 export async function getStaticProps({ locale }) {
-  const notionPages = await getAllNotionPages();
+  const notionPages = await getAllNotionPages(locale);
   return {
     props: {
       posts: notionPages,
