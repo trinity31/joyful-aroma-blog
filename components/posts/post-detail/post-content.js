@@ -3,6 +3,7 @@ import PostHeader from "./post-header";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import { useState } from "react";
+import { renderers } from "../../../lib/markdown-renderers";
 
 export default function PostContent({ post }) {
   const [imgError, setImgError] = useState(false);
@@ -36,7 +37,9 @@ export default function PostContent({ post }) {
         )}
       </div>
 
-      <ReactMarkdown>{post.content}</ReactMarkdown>
+      <ReactMarkdown className="markdown" components={renderers}>
+        {post.content}
+      </ReactMarkdown>
     </article>
   );
 }

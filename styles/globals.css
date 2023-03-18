@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
+/* @import "tailwindcss/base";
 @import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss/utilities"; */
 
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto&family=Source+Sans+Pro:wght@300&display=swap");
 
@@ -65,4 +65,14 @@ a {
 button {
   font: inherit;
   cursor: pointer;
+}
+
+ul {
+  @apply list-disc;
+  @apply pl-4; /* optional: add left padding */
+}
+
+li {
+  @apply list-item;
+  @apply text-base my-2;
 }
