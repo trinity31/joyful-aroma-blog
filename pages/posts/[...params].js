@@ -19,10 +19,20 @@ export async function getStaticProps(context) {
   };
 }
 
-export async function getStaticPaths() {
-  const allPages = await getAllNotionPages();
+export async function getStaticPaths({ locales }) {
+  console.log("getStaticPaths, locales: ");
 
-  // console.log("allPages:");
+  let allPages = [];
+
+  for (const locale of locales) {
+    // Call the getAllNotionPages function for the current locale
+    const pages = await getAllNotionPages(locale);
+    // Concatenate the result array with the allPages array
+    allPages = allPages.concat(pages);
+  }
+  // const allPages = await getAllNotionPages();
+
+  console.log("allPages length:", allPages.length);
   // console.log(allPages);
 
   return {

@@ -19,7 +19,7 @@ export default function PostItem(props) {
 
   return (
     <li className={classes.post}>
-      <Link href={linkPath}>
+      <Link href={linkPath} locale="en">
         <div className={classes.image}>
           {imgError ? (
             <Image
