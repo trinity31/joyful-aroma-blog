@@ -15,11 +15,11 @@ export default function PostItem(props) {
 
   const imagePath = `/images/posts/${slug}.jpeg`;
 
-  const linkPath = `/posts/${slug}/${id}`;
+  const linkPath = `/posts/${slug}`;
 
   return (
     <li className={classes.post}>
-      <Link href={linkPath} locale="en">
+      <Link href={linkPath}>
         <div className={classes.image}>
           {imgError ? (
             <Image

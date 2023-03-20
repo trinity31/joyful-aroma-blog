@@ -95,7 +95,7 @@ async function getNotionPagesNotTranslated(notion) {
   });
 
   for (const result of response.results) {
-    const page = await getPostData(result, null);
+    const page = await getPostData(result, null, "en");
     pages.push(page);
   }
 

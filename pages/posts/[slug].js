@@ -2,14 +2,18 @@ import { getAllNotionPages, getNotionPage } from "@/lib/notion-util";
 import PostContent from "../../components/posts/post-detail/post-content";
 
 export default function PostDetailPage(props) {
+  if (!props.post) {
+    return <div>Loading...</div>; // or any other fallback component or message
+  }
+
   return <PostContent post={props.post} />;
 }
 
 export async function getStaticProps(context) {
   const { params } = context;
-  const [slug, id] = params.params;
+  const { slug } = params;
 
-  const postData = await getNotionPage(id);
+  const postData = await getNotionPage(slug, context.locale);
 
   return {
     props: {
@@ -20,27 +24,19 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths({ locales }) {
-  console.log("getStaticPaths, locales: ");
-
   let allPages = [];
 
   for (const locale of locales) {
-    // Call the getAllNotionPages function for the current locale
     const pages = await getAllNotionPages(locale);
-    // Concatenate the result array with the allPages array
     allPages = allPages.concat(pages);
   }
-  // const allPages = await getAllNotionPages();
-
-  console.log("allPages length:", allPages.length);
-  // console.log(allPages);
 
   return {
     paths: allPages.map((page) => ({
       params: {
-        params: [page.slug, page.id],
+        slug: page.slug,
       },
     })),
-    fallback: false,
+    fallback: true,
   };
 }
