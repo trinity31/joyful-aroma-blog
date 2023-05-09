@@ -3,5 +3,14 @@
   "all_posts": "모든 게시물",
   "about_posts": "에센셜 오일에 대하여",
   "profile_posts": "에센셜 오일의 종류",
-  "aroma_journey": "아로마 여행"
+  "aroma_journey": "아로마 여행",
+  "recommend_title": "당신에게 필요한 에센셜 오일은?",
+  "recommend_desc": "해당되는 증상을 모두 선택해 주세요",
+  "physical_problems": "신체적 증상",
+  "mental_problems": "정신적 증상",
+  "recommend": "에센셜 오일 추천 받기",
+  "blending_tip": "추천 블렌딩",
+  "drop": "방울",
+  "blending_head": "피부에 바를 때는 베이스 오일에 3~4%로 희석하는 것이 좋습니다. ",
+  "blending_tail": "을 코코넛오일 10ml 에 떨어뜨려서 희석 후 피부에 바르고 마사지해 주세요."
 }

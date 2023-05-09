@@ -8,6 +8,7 @@ export default function AboutPosts(props) {
   return (
     <section className={classes.posts}>
       <h1>{t("about_posts")}</h1>
+      <br />
       <PostsGrid posts={props.posts} />
     </section>
   );

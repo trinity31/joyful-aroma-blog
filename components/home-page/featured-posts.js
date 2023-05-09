@@ -8,6 +8,7 @@ export default function FeaturedPosts(props) {
   return (
     <section className={classes.latest}>
       <h2>{t("featured_posts")}</h2>
+      <br />
       <PostsGrid posts={props.posts} />
     </section>
   );

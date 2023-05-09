@@ -8,6 +8,7 @@ export default function ProfilesPosts(props) {
   return (
     <section className={classes.posts}>
       <h1>{t("profile_posts")}</h1>
+      <br />
       <PostsGrid posts={props.posts} />
     </section>
   );

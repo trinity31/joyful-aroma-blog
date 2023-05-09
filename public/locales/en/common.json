@@ -3,5 +3,14 @@
   "all_posts": "All Posts",
   "about_posts": "About Essential Oils",
   "profile_posts": "Essential Oil Profiles",
-  "aroma_journey": "Aroma Journey"
+  "aroma_journey": "Aroma Journey",
+  "recommend_title": "What essential oils do you need?",
+  "recommend_desc": "Please select all that apply for you",
+  "physical_problems": "Physical Problems",
+  "mental_problems": "Mental Problems",
+  "recommend": "Get essential oils recommendation",
+  "blending_tip": "Recommended Blending",
+  "drop": "drops",
+  "blending_head": "When applied to the skin, it is recommended to dilute 3 to 4% in a base oil.",
+  "blending_tail": " into 10ml of coconut oil, dilute and apply to the skin and massage."
 }
