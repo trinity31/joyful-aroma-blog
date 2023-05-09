@@ -127,7 +127,7 @@ export default function Recommendations({ symptoms, posts }) {
         <h2 className="flex justify-center">{t("blending_tip")}</h2>
         <br />
         {/* <p>{t("blending_head")}</p> */}
-        <p>{blending}</p>
+        <p className="text-center">{blending}</p>
       </>
     );
   };
