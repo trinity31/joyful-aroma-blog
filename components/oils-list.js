@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TagLabel from "./ui/tag-label";
 
 export default function OilsList({ oils }) {
   return (
@@ -28,6 +29,9 @@ export default function OilsList({ oils }) {
               <p className="mt-2 text-sm font-medium text-gray-500 uppercase">
                 {oil.note} note
               </p>
+              <div className="flex justify-left">
+                <TagLabel tags={oil.symptoms} />
+              </div>
             </div>
           </Link>
         </div>

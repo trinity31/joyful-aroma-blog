@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto&family=Source+Sans+Pro:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto&family=Source+Sans+Pro&family=Nanum+Pen+Script:wght@300&display=swap");
 
 * {
   box-sizing: border-box;
+}
+
+.font-nanum-pen {
+  font-family: "Nanum Pen Script", cursive;
 }
 
 body {

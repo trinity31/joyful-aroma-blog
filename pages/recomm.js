@@ -5,6 +5,7 @@ import { getProfileNotionPages, getSymptomsList } from "@/lib/notion-util";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import OilsList from "@/components/oils-list";
+import Image from "next/image";
 
 export default function Recommendations({ symptoms, posts }) {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
@@ -66,6 +67,9 @@ export default function Recommendations({ symptoms, posts }) {
       });
     });
 
+    console.log("chosenOils");
+    console.log(chosenOils);
+
     const sortedOils = Object.entries(
       chosenOils.reduce((counts, oil) => {
         counts[oil] = (counts[oil] || 0) + 1;
@@ -75,9 +79,30 @@ export default function Recommendations({ symptoms, posts }) {
       .sort((a, b) => b[1] - a[1])
       .map(([oil]) => oil);
 
-    const filteredPosts = posts.filter((post) => {
-      return sortedOils.includes(post.id);
-    });
+    console.log("sortedOils");
+    console.log(sortedOils);
+
+    const filteredPosts = posts
+      .filter((post) => {
+        return sortedOils.includes(post.id);
+      })
+      .sort((a, b) => sortedOils.indexOf(a.id) - sortedOils.indexOf(b.id))
+      .map((filtereddOil) => {
+        return {
+          id: filtereddOil.id,
+          title: filtereddOil.title,
+          slug: filtereddOil.slug,
+          note: filtereddOil.note,
+          excerpt: filtereddOil.excerpt,
+          symptoms: filtereddOil.symptoms.filter((symptom) => {
+            return selectedSymptoms
+              .map((selectedSymptom) => selectedSymptom.name)
+              .includes(symptom);
+          }),
+        };
+      });
+
+    console.log(filteredPosts);
 
     setRecommendResult(filteredPosts);
 
@@ -124,21 +149,43 @@ export default function Recommendations({ symptoms, posts }) {
     return (
       <>
         <br />
-        <h2 className="flex justify-center">{t("blending_tip")}</h2>
+        <h2 className="flex justify-center">{t("blending_recommend")}</h2>
         <br />
-        {/* <p>{t("blending_head")}</p> */}
+
         <p className="text-center">{blending}</p>
+        <br />
+        <div className="flex justify-center">
+          <Image
+            src={"/images/blending.jpg"}
+            alt={"blending"}
+            width={300}
+            height={300}
+            style={{ borderRadius: "10px" }}
+          />
+        </div>
+        <br />
+        <p className="text-center">{t("blending_tip_title")}</p>
+        <br />
+        <p className="text-center">{t("blending_tip")}</p>
+        <br />
+        <div class="text-3xl text-purple-500 text-center font-nanum-pen">
+          {t("blending_outro")}
+        </div>
       </>
     );
   };
 
   return (
     <Container>
-      <h1 className="text-3xl font-semibold mb-6">{t("recommend_title")}</h1>
-      <h3 className="text-md font-normal mb-6">{t("recommend_desc")}</h3>
+      <h1 className="text-3xl font-semibold mb-6 text-center">
+        {t("recommend_title")}
+      </h1>
+      <h3 className="text-md font-normal mb-6 text-center">
+        {t("recommend_desc")}
+      </h3>
       <div className="flex flex-col sm:flex-row">
         <div className="pr-4 py-2 sm:w-1/2">
-          <h2 className="text-lg font-semibold mb-2">
+          <h2 className="text-lg font-semibold mb-4 text-center">
             {t("physical_problems")}
           </h2>
 
@@ -160,7 +207,9 @@ export default function Recommendations({ symptoms, posts }) {
           ))}
         </div>
         <div className="pr-4 py-2 sm:w-1/2">
-          <h2 className="text-lg font-semibold mb-2">{t("mental_problems")}</h2>
+          <h2 className="text-lg font-semibold mb-4 text-center">
+            {t("mental_problems")}
+          </h2>
           {mentalProblems.map((problem) => (
             <Disclosure key={problem.id}>
               <>
@@ -189,6 +238,7 @@ export default function Recommendations({ symptoms, posts }) {
       </div>
       {recommendResult && <OilsList oils={recommendResult}></OilsList>}
       <br />
+
       {recommendedBlends.length > 0 && renderBlending()}
     </Container>
   );
