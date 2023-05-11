@@ -63,18 +63,18 @@ export default function Recommendations({ symptoms, posts }) {
 
     selectedSymptoms.forEach((symptom) => {
       symptom.oils.forEach((oil) => {
-        console.log(oil);
+        // console.log(oil);
         chosenOils.push(oil.id);
         const post = posts.find((post) => post.id === oil.id);
         oil.name = post.title;
       });
     });
 
-    console.log("selectedSymptoms");
-    console.log(selectedSymptoms);
+    // console.log("selectedSymptoms");
+    // console.log(selectedSymptoms);
 
-    console.log("chosenOils");
-    console.log(chosenOils);
+    // console.log("chosenOils");
+    // console.log(chosenOils);
 
     const sortedOils = Object.entries(
       chosenOils.reduce((counts, oil) => {
@@ -85,8 +85,8 @@ export default function Recommendations({ symptoms, posts }) {
       .sort((a, b) => b[1] - a[1])
       .map(([oil]) => oil);
 
-    console.log("sortedOils");
-    console.log(sortedOils);
+    // console.log("sortedOils");
+    // console.log(sortedOils);
 
     const filteredPosts = posts
       .filter((post) => {
@@ -108,7 +108,7 @@ export default function Recommendations({ symptoms, posts }) {
         };
       });
 
-    console.log(filteredPosts);
+    //console.log(filteredPosts);
 
     setRecommendResult(filteredPosts);
 
