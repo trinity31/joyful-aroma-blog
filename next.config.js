@@ -18,4 +18,6 @@ module.exports = {
     ],
   },
   i18n,
+  // Increase the timeout to 10 minutes (in milliseconds)
+  staticPageGenerationTimeout: 600000,
 };
