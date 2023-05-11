@@ -26,12 +26,13 @@ export default function OilsList({ oils }) {
               </h2>
 
               <p className="mt-2 text-gray-600">{oil.excerpt}</p>
-              <p className="mt-2 text-sm font-medium text-gray-500 uppercase">
-                {oil.note} note
-              </p>
+
               <div className="flex justify-left">
                 <TagLabel tags={oil.symptoms} />
               </div>
+              <p className="mt-2 text-sm font-medium text-gray-500 uppercase">
+                {oil.note} note
+              </p>
             </div>
           </Link>
         </div>

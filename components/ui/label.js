@@ -16,7 +16,7 @@ export default function laLabel(props) {
     <span
       className={cx(
         "inline-block text-xs font-medium tracking-wider uppercase",
-        color.gray
+        color.blue
       )}
     >
       {props.children}

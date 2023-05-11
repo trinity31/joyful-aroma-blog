@@ -1,5 +1,5 @@
 import Link from "next/link";
-// import Label from "@/components/ui/label";
+import Label from "@/components/ui/label";
 
 export default function TagLabel({ tags }) {
   return (
@@ -7,12 +7,12 @@ export default function TagLabel({ tags }) {
       {tags?.length &&
         tags.map((tag) => (
           <Link href={`/search/${tag}`} key={tag}>
-            <span
+            <Label
               className="inline-block text-xs font-medium tracking-wider uppercase"
               // onClick={() => handleClick(tag.name)}
             >
               {tag}
-            </span>
+            </Label>
           </Link>
         ))}
     </div>

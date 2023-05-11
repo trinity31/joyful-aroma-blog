@@ -6,11 +6,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import OilsList from "@/components/oils-list";
 import Image from "next/image";
+import Table from "@/components/ui/table";
 
 export default function Recommendations({ symptoms, posts }) {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [recommendResult, setRecommendResult] = useState(null);
-  const [recommendedOils, setRecommendedOils] = useState([]);
   const [recommendedBlends, setRecommendedBlends] = useState([]);
   const { t } = useTranslation("common");
 
@@ -63,9 +63,15 @@ export default function Recommendations({ symptoms, posts }) {
 
     selectedSymptoms.forEach((symptom) => {
       symptom.oils.forEach((oil) => {
+        console.log(oil);
         chosenOils.push(oil.id);
+        const post = posts.find((post) => post.id === oil.id);
+        oil.name = post.title;
       });
     });
+
+    console.log("selectedSymptoms");
+    console.log(selectedSymptoms);
 
     console.log("chosenOils");
     console.log(chosenOils);
@@ -153,7 +159,13 @@ export default function Recommendations({ symptoms, posts }) {
         <br />
 
         <p className="text-center">{blending}</p>
+
         <br />
+        <h2 className="text-center">{t("blending_tip_title")}</h2>
+        <br />
+        <p className="text-center">{t("blending_tip")}</p>
+        <br />
+
         <div className="flex justify-center">
           <Image
             src={"/images/blending.jpg"}
@@ -163,10 +175,6 @@ export default function Recommendations({ symptoms, posts }) {
             style={{ borderRadius: "10px" }}
           />
         </div>
-        <br />
-        <p className="text-center">{t("blending_tip_title")}</p>
-        <br />
-        <p className="text-center">{t("blending_tip")}</p>
         <br />
         <div class="text-3xl text-purple-500 text-center font-nanum-pen">
           {t("blending_outro")}
@@ -236,7 +244,14 @@ export default function Recommendations({ symptoms, posts }) {
           {t("recommend")}
         </button>
       </div>
-      {recommendResult && <OilsList oils={recommendResult}></OilsList>}
+
+      {recommendResult && (
+        <>
+          <OilsList oils={recommendResult}></OilsList>
+          <br />
+          <Table symptoms={selectedSymptoms} />
+        </>
+      )}
       <br />
 
       {recommendedBlends.length > 0 && renderBlending()}
@@ -246,13 +261,12 @@ export default function Recommendations({ symptoms, posts }) {
 
 export async function getStaticProps({ locale }) {
   const symptoms = await getSymptomsList(locale);
-  // console.log(symptoms);
   const notionPages = await getProfileNotionPages(locale);
+
   return {
     props: {
       symptoms: symptoms,
       posts: notionPages,
-      // preferred_oils: oils.join(","),
       ...(await serverSideTranslations(locale, ["common"])),
     },
     revalidate: 600,
