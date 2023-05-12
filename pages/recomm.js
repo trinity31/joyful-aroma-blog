@@ -13,6 +13,8 @@ export default function Recommendations({ symptoms, posts }) {
   const [recommendResult, setRecommendResult] = useState(null);
   const [recommendedBlends, setRecommendedBlends] = useState([]);
   const { t } = useTranslation("common");
+  const { i18n } = useTranslation();
+  const currentLocale = i18n.language;
 
   const physicalProblems = symptoms.filter(
     (symptom) => symptom.category === "Physical"
@@ -114,6 +116,26 @@ export default function Recommendations({ symptoms, posts }) {
 
     const selectedOils = selectOils(filteredPosts);
     setRecommendedBlends(selectedOils);
+
+    sendRecommHistory(selectedOils, filteredPosts);
+  };
+
+  const sendRecommHistory = async (selectedOils, allOils) => {
+    const data = {
+      blending: selectedOils,
+      symptoms: selectedSymptoms,
+      oils: allOils,
+      locale: currentLocale,
+    };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const response = await fetch("/api/history", options);
+    const resultData = await response.json();
   };
 
   const handleSymptomClick = (symptom) => {
