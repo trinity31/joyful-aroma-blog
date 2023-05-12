@@ -1,7 +1,6 @@
 import FeaturedPosts from "@/components/home-page/featured-posts";
 import { getFeaturedNotionPages } from "@/lib/notion-util";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 
 export default function HomePage(props) {
   return (

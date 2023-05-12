@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import OilsList from "@/components/oils-list";
 import Image from "next/image";
 import Table from "@/components/ui/table";
+import Head from "next/head";
 
 export default function Recommendations({ symptoms, posts }) {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
@@ -206,78 +207,91 @@ export default function Recommendations({ symptoms, posts }) {
   };
 
   return (
-    <Container>
-      <h1 className="text-3xl font-semibold mb-6 text-center">
-        {t("recommend_title")}
-      </h1>
-      <h3 className="text-md font-normal mb-6 text-center">
-        {t("recommend_desc")}
-      </h3>
-      <div className="flex flex-col sm:flex-row">
-        <div className="pr-4 py-2 sm:w-1/2">
-          <h2 className="text-lg font-semibold mb-4 text-center">
-            {t("physical_problems")}
-          </h2>
+    <>
+      <Head>
+        <title>{t("recommend_title")}</title>
+        <meta name="description" content={t("recommend_desc")} />
+        <meta property="og:title" content={t("recommend_title")} />
+        <meta property="og:description" content={t("recommend_desc")} />
+        <meta
+          property="og:image"
+          content={"https://i.ibb.co/M7XKSm1/blending.jpg"}
+        />
+        <meta property="og:type" content="blog"></meta>
+      </Head>
+      <Container>
+        <h1 className="text-3xl font-semibold mb-6 text-center">
+          {t("recommend_title")}
+        </h1>
+        <h3 className="text-md font-normal mb-6 text-center">
+          {t("recommend_desc")}
+        </h3>
+        <div className="flex flex-col sm:flex-row">
+          <div className="pr-4 py-2 sm:w-1/2">
+            <h2 className="text-lg font-semibold mb-4 text-center">
+              {t("physical_problems")}
+            </h2>
 
-          {physicalProblems.map((problem) => (
-            <Disclosure key={problem.id}>
-              <>
-                <Disclosure.Button
-                  className={`${
-                    selectedSymptoms.includes(problem)
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-100 text-gray-800"
-                  } py-2 px-4 rounded-full mx-1 text-left mb-2 transition-colors duration-200 focus:outline-none focus:ring focus:ring-blue-500`}
-                  onClick={() => handleSymptomClick(problem)}
-                >
-                  {problem.name}
-                </Disclosure.Button>
-              </>
-            </Disclosure>
-          ))}
+            {physicalProblems.map((problem) => (
+              <Disclosure key={problem.id}>
+                <>
+                  <Disclosure.Button
+                    className={`${
+                      selectedSymptoms.includes(problem)
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-100 text-gray-800"
+                    } py-2 px-4 rounded-full mx-1 text-left mb-2 transition-colors duration-200 focus:outline-none focus:ring focus:ring-blue-500`}
+                    onClick={() => handleSymptomClick(problem)}
+                  >
+                    {problem.name}
+                  </Disclosure.Button>
+                </>
+              </Disclosure>
+            ))}
+          </div>
+          <div className="pr-4 py-2 sm:w-1/2">
+            <h2 className="text-lg font-semibold mb-4 text-center">
+              {t("mental_problems")}
+            </h2>
+            {mentalProblems.map((problem) => (
+              <Disclosure key={problem.id}>
+                <>
+                  <Disclosure.Button
+                    className={`${
+                      selectedSymptoms.includes(problem)
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-100 text-gray-800"
+                    } py-2 px-4 mx-1 rounded-full text-left mb-2 transition-colors duration-200 focus:outline-none focus:ring focus:ring-blue-500`}
+                    onClick={() => handleSymptomClick(problem)}
+                  >
+                    {problem.name}
+                  </Disclosure.Button>
+                </>
+              </Disclosure>
+            ))}
+          </div>
         </div>
-        <div className="pr-4 py-2 sm:w-1/2">
-          <h2 className="text-lg font-semibold mb-4 text-center">
-            {t("mental_problems")}
-          </h2>
-          {mentalProblems.map((problem) => (
-            <Disclosure key={problem.id}>
-              <>
-                <Disclosure.Button
-                  className={`${
-                    selectedSymptoms.includes(problem)
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-100 text-gray-800"
-                  } py-2 px-4 mx-1 rounded-full text-left mb-2 transition-colors duration-200 focus:outline-none focus:ring focus:ring-blue-500`}
-                  onClick={() => handleSymptomClick(problem)}
-                >
-                  {problem.name}
-                </Disclosure.Button>
-              </>
-            </Disclosure>
-          ))}
+        <div
+          class="flex justify-center items-center flex-col m-16"
+          onClick={recommendEssentialOils}
+        >
+          <button class="bg-pink-400 rounded-lg py-4 px-8 text-white text-xl block focus:outline-none focus:ring-pink-500 focus:ring-offset-2 transform hover:scale-105 active:scale-95 transition-all duration-100 ease-in-out">
+            {t("recommend")}
+          </button>
         </div>
-      </div>
-      <div
-        class="flex justify-center items-center flex-col m-16"
-        onClick={recommendEssentialOils}
-      >
-        <button class="bg-pink-400 rounded-lg py-4 px-8 text-white text-xl block focus:outline-none focus:ring-pink-500 focus:ring-offset-2 transform hover:scale-105 active:scale-95 transition-all duration-100 ease-in-out">
-          {t("recommend")}
-        </button>
-      </div>
 
-      {recommendResult && (
-        <>
-          <OilsList oils={recommendResult}></OilsList>
-          <br />
-          <Table symptoms={selectedSymptoms} />
-        </>
-      )}
-      <br />
+        {recommendResult && (
+          <>
+            <OilsList oils={recommendResult}></OilsList>
+            <br />
+            <Table symptoms={selectedSymptoms} />
+          </>
+        )}
+        <br />
 
-      {recommendedBlends.length > 0 && renderBlending()}
-    </Container>
+        {recommendedBlends.length > 0 && renderBlending()}
+      </Container>
+    </>
   );
 }
 
